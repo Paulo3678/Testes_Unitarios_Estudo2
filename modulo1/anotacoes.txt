@@ -1,0 +1,48 @@
+> Instalando o phpUnit
+composer require --dev  phpunit/phpunit ^7
+
+> Rodando o php phpUnit
+./vendor/phpunit/phpunit/phpunit
+
+> Da pra criar um "alias" no linux para rodar usando apenas "phpunit"
+
+> Dentro do .bashrc, na ultima linha, adicione:
+alias phpunit='./vendor/phpunit/phpunit/phpunit'
+
+> Salve o arquivo e rode o comando "bash" para atualizar seus bashs
+
+** Write and run your first test: An introduction to assertions **
+
+
+> Todas classes de testes precisam extender de "TestCase"
+
+> Roda os seus testes
+./vendor/phpunit/phpunit/phpunit <caminho da pasta de testes>
+
+> Criando um método de testes
+public function testMethodName(){}
+
+> Assertion: São basicamente verificações de alguma condição é verdadeira
+
+> Fazendo um assert, no seu método, basta chamar o seguinte método
+$this->assertEquals($meu_valor, $resultado_esperado);
+
+
+> Rodar testes no phpUnit é basicamente criar uma classe que extende de "TestCase", criar 
+métodos publicos que iniciam com "test" no nome e gerar um assert para validar o teste
+
+
+** Test a function: using multiple assertions **
+
+
+> Teste unitários geralmente testam o comportamento (behaviour) de uma função ou uma classe 
+
+> Uma boa prática é escrever os nomes do seus métodos de testes de maneira mais descritiva possível,
+falando exatamente o que ele vai fazer 
+> Exemplo:
+    public function testAddReturnsTheCorrectSum(){}
+
+> É possível ter mais de um assert em um método
+
+
+** Test that incorrect results are not returned: using multiple test methods **
