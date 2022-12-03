@@ -1,0 +1,39 @@
+** The PHPUnit test runner: specify diferent options when running tests **
+
+(up to now -> até agora)
+
+> Podemos rodar todos os teste de uma classe ou optar por apenas uma classe
+phpunit pasta/
+phpunit pasta/TestClass.php
+
+> Podemos também rodar apenas um método de uma classe
+phpunit pasta/ --filter=testReturnsFullName
+
+> Podemos também configurar cores para o output dos testes, apenas na hora de rodar o teste
+phpunit pasta/ --color
+
+
+** Configure PHPUnit: The XML configuration file
+> Podemos configurar, nas configurações padrões do phpunit, por exemplo, que sempre que eu rodar 
+um teste, é para mostrar uma cor, sem precisar colocar "--color"
+> Para isso, usamos o arquivo "phpunit.xml" de configurações do phpunit
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit colors='true'></phpunit>
+
+
+> Ou configurar que todos nossos testes estarão dentro da pasta "/tests", não tornando necessário passar o
+caminho para rodar os testes
+
+<phpunit>
+    <testsuite name='Test suite'>
+        <directory>tests</directory>
+    </testsuite>
+</phpunit>
+
+> Para ver mais configurações basta ir em "The XML Configuration File" na documentação oficial
+
+
+** Autoload classes being tested using Composer **
