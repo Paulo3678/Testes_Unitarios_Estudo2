@@ -11,6 +11,7 @@ alias phpunit='./vendor/phpunit/phpunit/phpunit'
 
 > Salve o arquivo e rode o comando "bash" para atualizar seus bashs
 
+
 ** Write and run your first test: An introduction to assertions **
 
 
@@ -46,3 +47,30 @@ falando exatamente o que ele vai fazer
 
 
 ** Test that incorrect results are not returned: using multiple test methods **
+
+> Pode ter mais de um teste em uma classe de testes.
+> A ideia de uma classe de testes é testar todos os aspectos do seu código
+> Até o momento usamos apenas o "assertEquals()" e o "assertNotEquals()", mas o phpUnit disponibiliza 
+uma lista de metodos para asserções, basta checar a documentação
+
+
+** Test a class: fixing bugs through testing **
+
+> Além de funções, podemos também testar classes
+> Uma boa prática é colocar como nome da sua classe de teste o nome da classe que será testada + Test
+
+
+** How to name yout test methods **
+
+> Criamos sempre métodos publicos nas nossas classes de teste, junto do prefixo "test" + nome do teste
+> A ideia por tras dos nomes dos métodos de teste é você fazer eles o mais descritivos possível, exatamente
+o que o método está testando
+> Como se fosse uma documentação de código
+
+> Uma outra maneira é adicionar a annotation @test dentro do docblock
+
+/**
+* @test
+*/
+public function userHasFirstName(){}
+
