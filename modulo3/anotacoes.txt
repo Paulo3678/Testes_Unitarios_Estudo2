@@ -1,0 +1,47 @@
+** Unit test a queue class **
+
+(queue -> fila)
+
+> Um queue é uma estrutura de dados similar ao array
+
+
+** Test dependencies: make one test method dependent on another**
+
+/*
+ * @depends testNewQueueIsEmpty
+*/
+public function outrometodo($valor){}
+
+> Diz que uma classe depende do valor retornado de outra classe
+
+
+** Fixtures: set up the knowb state of the tests using setUp() and tearDown() **
+
+> Criar dependências com o @depends torna a leitura do código mais difícil.
+> Dificultando na hora de saber da onde os dados vem.
+
+> setUp(): Chamado antes da chamada de cada teste
+
+> tearDown(): Chamado depois de cada teste, você pode colocar nele uma "limpeza" depois de cada teste
+> Não muito necessário, geralmente usado para métodos que usam muita memória como abrir um arquivo, 
+conectar num banco de dados.
+
+
+** Easily add a new test method using the test fixture **
+
+> array_shift(): Remove o primeiro item de um array
+
+
+** Share fixtures between tests for resource-intensive data **
+
+> As vezes instânciar toda hora um objeto pode ser custoso, para testes simples
+não há problema, mas para testes mais complexos existem abordagens melhores
+
+> public static function setUpBeforeClass(){}: Método executado apenas 1 vez antes de todos métodos da classe
+> public static function setUpBeforeClass(){}: Método executado apenas 1 vez depois de todos métodos da classe
+
+
+** Testing Exceptions: Expecting code to throw an exception **
+
+> $this->expectException(Exception::class)-> colocamos ele antes do método que irá lançar a exception. Verifica 
+se o exception passada vai ser lançada
