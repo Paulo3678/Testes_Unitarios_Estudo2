@@ -1,0 +1,65 @@
+** Test doubles: create mock objects to remove dependencies **
+
+> É bem comum ter classes que se relacionam ou dependem de outras
+> Por exemplo, a classe User pode usar um Database object, ou Mailer para 
+alguma feature
+> Quando nós testamos uma classe, nós queremos testá-la de maneira isolada. Toda e qualquer 
+dependencia dessa classe irá ter sua própria área de testes
+> Então, idealmente nós não queremos usar essas dependências nos nossos testes
+
+> Então... como evitamos (to avoid) de usar as dependências quando vamos testar uma classe?
+
+> A solução é usar dubles de testes.
+> Nós trocamos a dependência de uma classe por um fake ou mock, a então, temos total controle sobre
+eles
+
+-- Sem Mock
+$mail = new Mailer();
+$result = $mail->sendMessage("paulo@gmail.com", 'Olá');
+
+-- Com Mock
+$mail = $this->createMock(Mailer::class);
+$result = $mail->sendMessage("paulo@gmail.com", 'Olá');
+
+> Métodos de um mock são conhecidos como stubs, eles trocam o metodo original pelo do mock, por 
+padrão eles retornam "null"
+> Mas podemos alterar esse retorno, basta configurar o retorno desse método antes de chamá-lo
+
+$mock = $this->createMock(Mailer::class);
+
+$mock->method("sendMessage")
+    ->willReturn(true);
+
+$result = $mock->sendMessage("paulo@gmail.com", 'Olá');
+
+
+
+** Dependecy injection: Inject objects that a class depends **
+
+$mock_mailer = $this->createMock(Mailer::class);
+
+$mock_mailer->method('sendMessage')
+    ->willReturn(true);
+
+$user->setMailer($mock_mailer);
+
+
+** Test object interaction: Verify how a dependecy is used **
+
+$mock_mailer
+    ->expects($this->once())
+    ->method('sendMessage')
+    ->willReturn(true);
+
+> expects($this->once()): Espera que o metodo esperado seja chamado apenas 1 vez
+
+
+** Customise the creation of the mock object: The getMockBuilder method **
+> Um mock normal, troca os métodos padrões da sua classe e faz eles retornarem null
+> Em alguns casos queremos testar os métodos orginais, sem mudar nada
+
+$mock_mailer = $this->getMockBuilder(Mailer::class)
+    ->setMethods(null) // Faz o código original ser executado
+    ->getMock();
+
+setMethods(['metodo1', 'metodo2']); // Métodos que serão trocados por stubs
