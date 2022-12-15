@@ -1,0 +1,78 @@
+** Mock a dependency that doesn't exist yet **
+
+> Cria um mock de uma classe que ainda não existe
+
+$gateway = $this->getMockBuilder('PaymentGateway')
+    ->setMethods(['charge'])
+    ->getMock();
+
+$gateway
+    ->expects($this->once())
+    ->method('charge')
+    ->with($this->equalTo(200))
+    ->willReturn(true);
+
+
+** Using Mockery: Installation and integrations with PHPUnit **
+
+> Mockery é um framework de Mock Objects, que oferece uma alternativa para isso, 
+com um maneira diferente de se definir e trabalhar com Mock Objects, com algumas 
+funcionalidades adicionais que o PHPUnit não possui.
+
+> Mockery é facil de integrar com o PHPUnit e pode trabalhar ao lado (alongside) 
+dele
+
+> Instalação:
+composer require mockery/mockery:* --dev
+
+> Com ele instalado existem 2 maneiras de integrar o Mockery com o PHPUnit
+
+> 1º Adicionar um método tearDown na nossa classe de teste que possui a chamada 
+do método "close()" do Mockery
+class ExampleTest extends TestCase
+{
+    public function tearDown(): void
+    {
+        Mockery::close();
+    }
+}
+
+> 2º Uma alternativa, para evitar de criar um tearDown, nossa classe de teste deve 
+extender do Mockery Test Case
+
+use Mockery\Adapter\Phpunit\MockeryTestCase;
+
+class ExampleTest extends MockeryTestCase
+{
+}
+
+
+** Using Mockery to mock a dependency that doesn't exists yet **
+
+$gateway = Mockery::mock("PaymentGateway");
+$gateway->shouldReceive('charge')
+    ->once()
+    ->with(200)
+    ->andReturn(true);
+
+
+** PHPUnit vs Mockery: Returning different values on subsequent method calls **
+
+
+** Mockery Spies: Make assertions on call after the event **
+
+Spyes são parecidos com mocks, mas a instancia deles é feita antes de rodarmos o código
+de teste. Spyes permitem criar asserções com o código sendo rodado, depois que já rodamos ele.
+
+$order = new Order(3, 1.99);
+$this->assertEquals(5.97, $order->amount);
+
+$gateway_spy = Mockery::spy("PaymentGateway");
+$order->process($gateway_spy);
+
+$gateway_spy->shouldHaveReceived('charge')
+    ->once()
+    ->with(5.97);
+
+Um Spy não é capaz de especificar um valor de retorno para uma chamada de função, só é 
+possível fazer isso com o Mock

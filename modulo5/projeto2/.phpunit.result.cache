@@ -1,0 +1,1 @@
+{"version":1,"defects":{"OrderTest::testOrderIsProcessedUsingAMock":4},"times":{"OrderTest::testOrderIsProcessedUsingAMock":0.014,"OrderTest::testOrderIsProcessedUsingAsSpy":0.001}}
