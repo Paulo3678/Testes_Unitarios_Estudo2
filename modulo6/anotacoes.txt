@@ -1,0 +1,25 @@
+** Test-driven development: set up a TDD project **
+
+> A maneira que estamos testando, o código já existe, essa é uma boa maneira para 
+ver se o nosso projeto está funcionando corretamente
+
+> De qualquer forma, existe uma outra maneira de nós desenvolvermos o código pensado, 
+e ela é "Escrever os testes primeiro, depois o código"
+
+> Isso é conhecido como "Test Driven Development" ou TDD
+
+
+** Write the test first, then write the code to make it pass **
+
+> No TDD escrevemos o mínimo de código possível, testamos ele para dar erro, arrumamos o erro,
+refatoramos e repetimos o processo
+
+** Write just enough code to make the test pass **
+
+** Add tests and refactor code until the tests pass **
+
+** Add more tests and application code functionality **
+
+** Another test, more functionality, and more refactoring **
+
+** Data providers: provide a test method with a collection of **
